@@ -1,0 +1,30 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.tools.build:gradle:4.0.0"
+
+    //javassist 这个在jcenter 仓库
+    implementation 'org.javassist:javassist:3.20.0-GA'
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+uploadArchives{
+    repositories.mavenDeployer{
+        repository(url:uri('../repo'))
+        pom.groupId='com.example.javamodify'
+        pom.artifactId='modify'
+        pom.version='1.0.1'
+    }
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
